@@ -24,10 +24,10 @@ A web application that uses Google's Gemini API to transform basic prompts into 
 ### 🔄 Workflow
 1. User enters a basic prompt in the textarea
 2. Clicks "Generate" button
-3. Input and button disappear, loading spinner appears
+3. "Generate" button disappear, loading spinner appears
 4. Enhanced prompt displays in output area
-5. "Enhance New Prompt" button appears
-6. Click to start a new enhancement
+5. "Enhance New Prompt" and "Copy to Clipboard" buttons appear
+6. Click to copy generated prompt to clipboard or start a new enhancement 
 
 ## Technology Stack
 
@@ -67,12 +67,12 @@ project/
 
 ### Gemini API
 
-The app uses Google's Gemini 2.0 Flash Experimental model for prompt enhancement.
+The app uses Google's Gemini 3.0 Flash Experimental model for prompt enhancement.
 
 **Key Implementation Details:**
 ```javascript
 const genai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genai.getGenerativeModel({model: "gemini-2.0-flash-exp"});
+const model = genai.getGenerativeModel({model: "gemini-3.0-flash-preview"});
 const result = await model.generateContent(promptText);
 ```
 
@@ -110,11 +110,11 @@ const result = await model.generateContent(promptText);
 
 ### State Management
 ```javascript
-// Loading State ON
+//loading state ON
 generate.disabled = true;
 spinner.classList.add('visible');
 
-// Loading State OFF
+//loading state OFF
 generate.disabled = false;
 spinner.classList.remove('visible');
 ```
@@ -139,9 +139,9 @@ Custom CSS conic gradient with smooth rotation:
 ```css
 background: conic-gradient(
     from 0deg, 
-    rgb(0, 157, 255),    /* Cyan */
-    rgb(255, 0, 255),    /* Magenta */
-    rgb(0, 157, 255)     /* Loop back */
+    rgb(0, 157, 255),    /*Cyan*/
+    rgb(255, 0, 255),    /*Magenta*/
+    rgb(0, 157, 255)     /*Loop back*/
 );
 animation: spin 0.8s linear infinite;
 ```
@@ -189,13 +189,11 @@ const response = await fetch('/submit', {
 
 ## Future Enhancements
 
-- [ ] Copy to clipboard functionality
 - [ ] Prompt history/saved prompts
 - [ ] Multiple enhancement styles/tones
 - [ ] Character count indicator
 - [ ] Dark mode toggle
 - [ ] Export enhanced prompts
-- [ ] Mobile-optimized interface
 
 ## Security
 
